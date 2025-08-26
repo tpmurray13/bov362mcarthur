@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker's Opinion of Value - Land Analysis: 362 McArthur Rd</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        @media print {
+            body {
+                font-family: 'Times New Roman', serif;
+                background-color: #fff;
+            }
+            header, footer, #main-nav {
+                display: none !important;
+            }
+            main {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            section {
+                margin-bottom: 2rem !important;
+                page-break-inside: avoid;
+            }
+            .grid {
+                display: block !important;
+            }
+            .bg-white, .valuation-card {
+                box-shadow: none !important;
+                border: 1px solid #ccc;
+                margin-bottom: 1rem;
+            }
+            .valuation-card {
+                 border-left-width: 4px;
+            }
+            h1, h2, h3 {
+                color: #000 !important;
+            }
+            .text-sky-700, .text-red-600, .text-green-600 {
+                color: #000 !important;
+            }
+            p {
+                font-size: 12pt;
+            }
+            .chart-container, .photo-container {
+                page-break-inside: avoid;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-900">Broker's Opinion of Value</h1>
+                    <p class="text-sm text-gray-500">Land Analysis - 362 McArthur Rd, Fayetteville, NC</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <section id="summary" class="mb-12 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-4">Property Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="bg-white p-6 rounded-lg shadow">
+                     <h3 class="text-lg font-semibold mb-2">Property Details</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Parcel Size</p>
+                            <p class="text-2xl font-semibold text-sky-700">3.3 Acres</p>
+                        </div>
+                         <div>
+                            <p class="text-sm font-medium text-gray-500">Property Type</p>
+                            <p class="text-2xl font-semibold text-sky-700">Commercial Land</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <img src="https://www.dropbox.com/scl/fi/en6h6r762apz8w4ad2pge/Screenshot-2025-08-26-145311.png?rlkey=rttryu9iv3crhixq5wils5xxw&raw=1" alt="Aerial of 362 McArthur Rd" class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section id="sale-valuation" class="mb-12 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-4">Sale Valuation Analysis</h2>
+            <div class="bg-white p-6 rounded-lg shadow mb-8">
+                <h3 class="text-lg font-semibold mb-2">Valuation Overview</h3>
+                <p class="text-gray-600">The current asking price for the subject property is significantly above market. Based on a thorough analysis of both on-market and recently sold comparable land parcels, a valuation in the range of **$525,000 to $595,000 per acre** is recommended. The primary comparables at 5818 Ramsey St and 6316 Ramsey St, which are actively listed, strongly support this revised pricing strategy.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="chart-container">
+                        <canvas id="saleValuationChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="valuation-card bg-white p-4 rounded-lg shadow border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-600">Low Estimate</h3>
+                        <p class="text-2xl font-semibold">$1,732,500</p>
+                        <p class="text-gray-500">$525,000 / Acre</p>
+                    </div>
+                    <div class="valuation-card bg-white p-4 rounded-lg shadow border-l-4 border-sky-600">
+                        <h3 class="font-bold text-sky-700">Recommended Price</h3>
+                        <p class="text-2xl font-semibold">$1,848,000</p>
+                        <p class="text-gray-500">$560,000 / Acre</p>
+                    </div>
+                    <div class="valuation-card bg-white p-4 rounded-lg shadow border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-600">High Estimate</h3>
+                        <p class="text-2xl font-semibold">$1,963,500</p>
+                        <p class="text-gray-500">$595,000 / Acre</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comps" class="mb-12 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-4">Comparable Properties</h2>
+            <div class="bg-white p-6 rounded-lg shadow overflow-x-auto mb-8">
+                <h3 class="text-lg font-semibold mb-4">On-Market Land Comparables</h3>
+                <table class="w-full text-sm text-left" id="onMarketCompsTable">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">Address</th>
+                            <th scope="col" class="px-4 py-3">Size (AC)</th>
+                            <th scope="col" class="px-4 py-3">Asking Price ($/AC)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow overflow-x-auto">
+                <h3 class="text-lg font-semibold mb-4">Sold Land Comparables</h3>
+                <table class="w-full text-sm text-left" id="saleCompsTable">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">Address</th>
+                            <th scope="col" class="px-4 py-3">Size (AC)</th>
+                            <th scope="col" class="px-4 py-3">Sale Price ($/AC)</th>
+                            <th scope="col" class="px-4 py-3">Sale Date</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="recommendations" class="mb-12 scroll-mt-24">
+            <h2 class="text-2xl font-bold mb-4">Recommendations</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-lg font-semibold mb-2">Recommended Listing Price</h3>
+                <p class="text-3xl font-bold text-sky-700 mb-4">$1,848,000</p>
+                <p class="text-gray-600">This price is based on the midpoint of the valuation range at **$560,000 per acre**. It is a competitive but strong market position that reflects the property's value while aligning with the most relevant comparable sales data.</p>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="bg-white mt-12 py-4 border-t">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>This is a Broker's Opinion of Value and should not be considered an appraisal. All data is for informational purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const propertyData = {
+                saleComps: [
+                    { address: 'Bonanza Dr', sf: 3.46, price_acre: 491184, date: '2025-05-21' },
+                    { address: '2440 Two Bale Ln', sf: 2.61, price_acre: 325669, date: '2025-03-28' },
+                    { address: '5956 Camden Rd', sf: 5.10, price_acre: 279412, date: '2025-06-17' }
+                ],
+                onMarketComps: [
+                    { address: '5818 Ramsey St', sf: 8.30, rate: 530120 },
+                    { address: '6316 Ramsey St', sf: 7.08, rate: 529661 },
+                    { address: '417 Country Club Dr', sf: 3.67, rate: 243869 },
+                    { address: 'McArthur Rd', sf: 3.59, rate: 197771 },
+                    { address: '4808 Ramsey St', sf: 3.31, rate: 1208459 }
+                ],
+                saleValuation: {
+                    low: 1732500,
+                    expected: 1848000,
+                    high: 1963500
+                }
+            };
+
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+            }
+            
+            function initSaleValuationChart() {
+                const ctx = document.getElementById('saleValuationChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Low', 'Recommended', 'High'],
+                        datasets: [{
+                            label: 'Sale Price ($)',
+                            data: [
+                                propertyData.saleValuation.low,
+                                propertyData.saleValuation.expected,
+                                propertyData.saleValuation.high
+                            ],
+                           backgroundColor: ['rgba(239, 68, 68, 0.6)', 'rgba(2, 132, 199, 0.6)', 'rgba(34, 197, 94, 0.6)'],
+                            borderColor: ['rgba(239, 68, 68, 1)','rgba(2, 132, 199, 1)','rgba(34, 197, 94, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => formatCurrency(c.raw) } } },
+                        scales: { x: { ticks: { callback: (v) => formatCurrency(v) }, min: 0 } }
+                    }
+                });
+            }
+
+            function populateSaleCompsTable() {
+                const tableBody = document.querySelector('#saleCompsTable tbody');
+                tableBody.innerHTML = '';
+                const sortedComps = [...propertyData.saleComps].sort((a,b) => new Date(b.date) - new Date(a.date));
+                sortedComps.forEach(comp => {
+                    const row = document.createElement('tr');
+                    row.className = 'bg-white border-b';
+                    row.innerHTML = `
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">${comp.address}</td>
+                        <td class="px-4 py-3">${comp.sf.toLocaleString()}</td>
+                        <td class="px-4 py-3">${formatCurrency(comp.price_acre)}</td>
+                        <td class="px-4 py-3">${new Date(comp.date).toLocaleDateString()}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function populateOnMarketCompsTable() {
+                const tableBody = document.querySelector('#onMarketCompsTable tbody');
+                tableBody.innerHTML = '';
+                propertyData.onMarketComps.forEach(comp => {
+                    const row = document.createElement('tr');
+                    row.className = 'bg-white border-b';
+                    row.innerHTML = `
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">${comp.address}</td>
+                        <td class="px-4 py-3">${comp.sf.toLocaleString()}</td>
+                        <td class="px-4 py-3">${formatCurrency(comp.rate)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+            
+            initSaleValuationChart();
+            populateSaleCompsTable();
+            populateOnMarketCompsTable();
+        });
+    </script>
+</body>
+</html>
